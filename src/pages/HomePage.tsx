@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import AuthContext, { AuthContextType } from '../context/AuthContext';
 import { Navigate, Link, Router, Route } from 'react-router-dom';
 
-// Define the type for a note
+
 interface Note {
   id: number;
   text: string;
@@ -10,7 +10,8 @@ interface Note {
 
 const HomePage = () => {
   
-  let [notes, setNotes] = useState<Note[]>([]);
+  console.log('check HomePage');
+  
   let token = localStorage.getItem('authTokens');
   let parsedToken = token ? JSON.parse(token) : null;
   const authContext = useContext<AuthContextType>(AuthContext);
@@ -33,7 +34,7 @@ const HomePage = () => {
     });
     let data = await response.json();
     if(response.status === 200){
-      setNotes(data);
+      // setNotes(data);
     }
     else if(response.statusText === 'Unauthorized'){	
         logOutUser();
